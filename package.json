@@ -1,0 +1,16 @@
+{
+  "name": "course_one",
+  "version": "1.0.0",
+  "description": "- Add notes -  Remove Note - Edit",
+  "main": "demo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "request": "^2.88.0",
+    "yargs": "^14.0.0"
+  }
+}

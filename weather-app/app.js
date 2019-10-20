@@ -1,5 +1,6 @@
 const yargs = require('yargs');
-const request = require('request');
+const fetchLocation = require('./location/location');
+const fetchWeather = require('./weather/weather')
 
 yargs.command({
   command: 'fetch-location',
@@ -11,22 +12,15 @@ yargs.command({
   },
   handler: (argv) => {
     console.log(argv);
-    fetchLocation(argv.location);
+    fetchLocation(argv.location, (err,locationResult) => {
+      if (err == undefined) {
+        fetchWeather(locationResult.latitude, locationResult.longtitude);
+      } else {
+        console.log(err);
+      }
+    });
   }
 });
 
-const fetchLocation = (location) => {
-  request({
-    url: `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=AIzaSyC0vm5u0m1Etrg23GpVNLH52OsltfdppF0`,
-    json: true
-  }, (err, res, body) => {
-      if (err) {
-        console.log(err)
-      } else{
-        console.log(body.reault.address_components);
-      }
-      
-  });
-}
 yargs.parse();
 // console.log(yargs.argv);
